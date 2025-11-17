@@ -1,0 +1,1 @@
+terraform { backend "local" { path = "../../state/staging.tfstate" } } 

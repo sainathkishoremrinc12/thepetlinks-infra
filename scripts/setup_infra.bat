@@ -1,0 +1,3 @@
+@echo off
+echo Setting up ThePetLinks Infra...
+REM This script auto-creates folders and base files

@@ -1,0 +1,35 @@
+statefulset:
+  replicas: 1
+
+config:
+  redpanda:
+    developer_mode: true
+    enable_sasl: false
+    tls:
+      enabled: false
+
+tls:
+  enabled: false
+
+external:
+  tls:
+    enabled: false
+
+storage:
+  persistentVolume:
+    enabled: false
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+
+console:
+  enabled: true
+  console:
+    enabled: true
+    ingress:
+      enabled: false

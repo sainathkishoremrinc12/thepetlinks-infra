@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gateway-app
+spec:
+  project: thepetlinks
+  source:
+    repoURL: https://github.com/ThePetLinks/thepetlinks-infra
+    path: helm/gateway
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gateway
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

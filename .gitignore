@@ -1,0 +1,12 @@
+target/ 
+
+postgres_user_password = "PeTL!nk@2025$P@ss"
+postgres_password    = "MrInc@2018$PeT"
+
+redis_password         = "MrInc@2018$PeT"
+
+kafka_user             = "thepetlinks-app"
+kafka_password         = "MrInc@2018$PeT"
+
+minio_root_user        = "admin"
+minio_root_password    = "MrInc@2018$PeT"

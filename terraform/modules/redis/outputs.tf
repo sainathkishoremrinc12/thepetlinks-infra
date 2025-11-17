@@ -1,0 +1,1 @@
+# redis module outputs.tf 
