@@ -7,5 +7,3 @@ It contains infrastructure-as-code (IaC) definitions, deployment configurations,
 ---
 
 ## 🧱 Structure Overview
-
-<!-- dckr_pat_-mp4rCb5y-dPHK81LHHrA5YSmIM -->
