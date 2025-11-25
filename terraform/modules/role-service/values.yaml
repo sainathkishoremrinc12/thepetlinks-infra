@@ -1,0 +1,12 @@
+image:
+  repository: "ghcr.io/thepetlinks/role-service"
+  tag: "${image_tag}"
+
+env:
+  APP_PORT: "4101"
+  DB_USER: "${db_user}"
+  DB_PASSWORD: "${db_pass}"
+  DB_HOST: "postgresql.postgres.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_NAME: "thepetlinksdb"
+  DB_SSLMODE: "disable"

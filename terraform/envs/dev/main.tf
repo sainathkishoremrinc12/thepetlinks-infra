@@ -53,3 +53,11 @@ module "kafka" {
   namespace    = "messaging"
   release_name = "redpanda"
 }
+
+module "role_service" {
+  source      = "../../modules/role-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}

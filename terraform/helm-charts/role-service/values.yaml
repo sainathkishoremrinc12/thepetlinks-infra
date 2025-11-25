@@ -1,0 +1,16 @@
+image:
+  repository: role-service
+  tag: "latest"
+  pullPolicy: Never
+
+service:
+  port: 4101
+
+env:
+  APP_PORT: "4101"
+  DB_HOST: "postgresql.postgres.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_USER: "thepetlinks"
+  DB_PASSWORD: "PeTL!nk@2025$P@ss"
+  DB_NAME: "thepetlinksdb"
+  DB_SSLMODE: "disable"

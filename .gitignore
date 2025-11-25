@@ -10,3 +10,5 @@ kafka_password         = "MrInc@2018$PeT"
 
 minio_root_user        = "admin"
 minio_root_password    = "MrInc@2018$PeT"
+
+# helm upgrade postgres bitnami/postgresql -n petlinks-dev --set auth.password="MrInc@2018$PeT"

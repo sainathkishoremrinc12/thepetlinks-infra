@@ -54,3 +54,14 @@ variable "minio_root_password" {
   type        = string
   sensitive   = true
 }
+
+variable "db_user" {
+  type        = string
+  description = "Database username"
+}
+
+variable "db_password" {
+  type        = string
+  description = "Database password"
+  sensitive   = true
+}
