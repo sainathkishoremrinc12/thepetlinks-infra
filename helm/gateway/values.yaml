@@ -1,1 +1,15 @@
 # Default Helm values for gateway 
+replicaCount: 1
+
+image:
+  repository: localhost:5000/thepetlinks-gateway
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 4013
+
+env:
+  JAVA_OPTS: "-Xms256m -Xmx512m"
+
+resources: {}

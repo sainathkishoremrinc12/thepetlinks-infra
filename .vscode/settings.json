@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "PetLink",
+            "group": "PetLink",
+            "database": "thepetlinksdb",
+            "username": "thepetlinks",
+            "password": "PeTL!nk@2025$P@ss"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gateway.fullname" . }}
+  labels:
+    app: {{ include "gateway.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "gateway.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "gateway.name" . }}
+    spec:
+      containers:
+        - name: gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: JAVA_OPTS
+              value: {{ .Values.env.JAVA_OPTS | quote }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          args:
+            - "-jar"
+            - "/app/app.jar"
+
+# helm upgrade --install gateway ../services/gateway/helm/gateway -n petlinks-dev & kubectl delete pod -l app=gateway -n petlinks-dev & kubectl logs -f deployment/gateway -n petlinks-dev

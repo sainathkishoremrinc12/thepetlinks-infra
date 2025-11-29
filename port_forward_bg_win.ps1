@@ -1,0 +1,41 @@
+# Stop previous port-forward background jobs
+Get-Job | Remove-Job -Force
+
+Write-Host "`nStarting Port-Forward for Role-Service (4101) ..."
+Start-Job -ScriptBlock {
+    kubectl port-forward deployment/role-service 4101:4101 -n petlinks-dev
+}
+
+Write-Host "Starting Port-Forward for Gateway (4013) ..."
+Start-Sleep -Seconds 2   # IMPORTANT DELAY
+
+Start-Job -ScriptBlock {
+    kubectl port-forward deployment/gateway 4013:4013 -n petlinks-dev
+}
+
+# Wait a few seconds to ensure startup
+Start-Sleep -Seconds 3
+
+Write-Host "`nChecking active ports:"
+netstat -ano | findstr ":4013"
+netstat -ano | findstr ":4101"
+
+Write-Host "`nPort forwarding now running in background"
+
+# TRUNCATE TABLE
+#   role_menu_permissions,
+#   permissions,
+#   roles,
+#   menus
+# RESTART IDENTITY CASCADE;
+
+# Get-Job | Remove-Job -Force;
+# Start-Job { kubectl port-forward deployment/role-service 4101:4101 -n petlinks-dev };
+# Start-Job { kubectl port-forward deployment/gateway 4013:4013 -n petlinks-dev };
+# netstat -ano | findstr 4101;
+# netstat -ano | findstr 4013;
+
+# docker build --no-cache -t role-service:latest .
+# helm upgrade --install role-service ../services/core/thepetlink-role-service/helm/role-service -n petlinks-dev & kubectl delete pod -l app=role-service -n petlinks-dev & kubectl logs -f deployment/role-service -n petlinks-dev
+# docker build --no-cache -t gateway:latest .
+# helm upgrade --install gateway ../services/gateway/helm/gateway -n petlinks-dev & kubectl delete pod -l app=gateway -n petlinks-dev & kubectl logs -f deployment/gateway -n petlinks-dev
