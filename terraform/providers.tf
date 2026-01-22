@@ -5,4 +5,13 @@ terraform {
   }
 }
 provider "kubernetes" { config_path = "~/.kube/config" }
-provider "helm" { kubernetes { config_path = "~/.kube/config" } }
+provider "helm" {
+  kubernetes {
+    config_path = pathexpand("~/.kube/config")
+  }
+
+  experiments {
+    manifest = false
+  }
+}
+

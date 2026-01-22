@@ -27,7 +27,6 @@ provider "helm" {
 # 🐘 PostgreSQL Module
 module "postgresql" {
   source = "../../modules/postgresql"
-
   postgres_user          = "thepetlinks"
   postgres_user_password = var.postgres_user_password
   postgres_password      = var.postgres_password
@@ -49,11 +48,12 @@ module "minio" {
 
 # 🦋 Kafka Module
 module "kafka" {
-  source       = "../../modules/kafka"
-  namespace    = "messaging"
-  release_name = "redpanda"
+  source        = "../../modules/kafka"
+  namespace     = "kafka"
+  release_name  = "kafka"
 }
 
+# Role Module
 module "role_service" {
   source      = "../../modules/role-service"
   namespace   = "petlinks-dev"

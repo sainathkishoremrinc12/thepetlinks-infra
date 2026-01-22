@@ -1,18 +1,26 @@
-resource "kubernetes_namespace" "redpanda" {
+resource "kubernetes_namespace" "kafka" {
   metadata {
     name = var.namespace
   }
 }
 
-resource "helm_release" "redpanda" {
-  name       = var.release_name
-  namespace  = kubernetes_namespace.redpanda.metadata[0].name
+resource "helm_release" "kafka" {
+  name             = var.release_name
+  chart            = "${path.module}/charts/kafka"
+  namespace        = var.namespace
+  create_namespace = true
 
-  repository = "https://charts.redpanda.com"
-  chart      = "redpanda"
-  version    = "5.9.10"
+  dependency_update = false
+
+  wait    = true
+  atomic  = true
+  timeout = 600
 
   values = [
     file("${path.module}/values.yaml")
+  ]
+
+  depends_on = [
+    kubernetes_namespace.kafka
   ]
 }

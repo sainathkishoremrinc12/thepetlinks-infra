@@ -1,8 +1,12 @@
 resource "helm_release" "postgresql" {
-  name       = "postgresql"
-  chart      = "bitnami/postgresql"
-  version    = "18.1.9"
-  namespace  = "postgresql"
+  name             = "postgresql"
+  chart            = "${path.module}/charts/postgresql"
+  namespace        = "postgresql"
+  create_namespace = true
+
+  wait    = true
+  atomic = true
+  timeout = 600
 
   values = [
     yamlencode({

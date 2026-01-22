@@ -1,35 +1,36 @@
-statefulset:
-  replicas: 1
+image:
+  registry: docker.io
+  repository: bitnami/kafka
+  tag: 3.6.1
+  pullPolicy: IfNotPresent
 
-config:
-  redpanda:
-    developer_mode: true
-    enable_sasl: false
-    tls:
-      enabled: false
+kraft:
+  enabled: true
 
-tls:
+zookeeper:
   enabled: false
 
-external:
-  tls:
+replicaCount: 1
+
+auth:
+  enabled: false
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+
+persistence:
+  enabled: false
+
+controller:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+
+metrics:
+  kafka:
     enabled: false
-
-storage:
-  persistentVolume:
-    enabled: false
-
-resources:
-  limits:
-    cpu: "500m"
-    memory: "512Mi"
-  requests:
-    cpu: "200m"
-    memory: "256Mi"
-
-console:
-  enabled: true
-  console:
-    enabled: true
-    ingress:
-      enabled: false
