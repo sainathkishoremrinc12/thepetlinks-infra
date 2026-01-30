@@ -1,0 +1,9 @@
+kubectl create secret generic pgadmin-secret \
+-n postgresql \
+--from-literal=PGADMIN_DEFAULT_EMAIL=admin@petlinks.com \
+--from-literal=PGADMIN_DEFAULT_PASSWORD='PeTL!nk@2025$P@ss'
+
+kubectl apply -f pgadmin-pvc.yaml
+kubectl apply -f pgadmin-deployment.yaml
+kubectl apply -f pgadmin-service.yaml
+kubectl apply -f pgadmin-ingress.yaml

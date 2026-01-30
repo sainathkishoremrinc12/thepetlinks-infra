@@ -1,0 +1,16 @@
+image:
+  repository: auth-service
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 4101
+
+env:
+  APP_PORT: "4101"
+  DB_HOST: "postgresql.postgres.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_USER: "thepetlinks"
+  DB_PASSWORD: "PeTL!nk@2025$P@ss"
+  DB_NAME: "auth_db"
+  DB_SSLMODE: "disable"

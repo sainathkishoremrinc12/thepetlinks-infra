@@ -41,21 +41,36 @@ module "redis" {
 
 # 🪣 MinIO Module
 module "minio" {
-  source              = "../../modules/minio"
-  minio_root_user     = var.minio_root_user
-  minio_root_password = var.minio_root_password
-}
+  source = "../../modules/minio"
 
-# 🦋 Kafka Module
-module "kafka" {
-  source        = "../../modules/kafka"
-  namespace     = "kafka"
-  release_name  = "kafka"
+  namespace       = "minio"
+  root_user       = "admin"
+  root_password   = "MrInc@2018$PeT"
+  storage_size    = "10Gi"
+  console_host    = "minio-console.petlinks.local"
 }
 
 # Role Module
 module "role_service" {
   source      = "../../modules/role-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# Auth Module
+module "auth_service" {
+  source      = "../../modules/auth-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# Plan Module
+module "plan_service" {
+  source      = "../../modules/plan-service"
   namespace   = "petlinks-dev"
   image_tag   = "latest"
   db_user     = var.db_user

@@ -1,43 +1,27 @@
-# minio module variables.tf 
 variable "namespace" {
+  description = "Namespace for MinIO"
   type        = string
-  description = "Namespace for MinIO deployment"
   default     = "minio"
 }
 
-variable "release_name" {
+variable "root_user" {
+  description = "MinIO root user"
   type        = string
-  description = "Helm release name"
-  default     = "minio"
 }
 
-variable "repository" {
-  type        = string
-  description = "Helm chart repository URL"
-  default     = "https://charts.bitnami.com/bitnami"
-}
-
-variable "chart" {
-  type        = string
-  description = "Helm chart name"
-  default     = "minio"
-}
-
-variable "chart_version" {
-  type        = string
-  description = "MinIO chart version"
-  default     = "17.0.21"
-}
-
-variable "minio_root_user" {
-  type        = string
-  description = "MinIO root username"
-  default     = ""
-}
-
-variable "minio_root_password" {
-  type        = string
+variable "root_password" {
   description = "MinIO root password"
-  default     = ""
+  type        = string
+  sensitive   = true
 }
 
+variable "storage_size" {
+  description = "PVC storage size"
+  type        = string
+  default     = "10Gi"
+}
+
+variable "console_host" {
+  description = "Ingress host for MinIO console"
+  type        = string
+}

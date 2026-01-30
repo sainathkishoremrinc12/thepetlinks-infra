@@ -1,7 +1,7 @@
 image:
   repository: role-service
   tag: "latest"
-  pullPolicy: Never
+  pullPolicy: IfNotPresent
 
 service:
   port: 4101
@@ -12,5 +12,5 @@ env:
   DB_PORT: "5432"
   DB_USER: "thepetlinks"
   DB_PASSWORD: "PeTL!nk@2025$P@ss"
-  DB_NAME: "thepetlinksdb"
+  DB_NAME: "access_db"
   DB_SSLMODE: "disable"

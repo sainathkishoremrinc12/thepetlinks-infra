@@ -1,0 +1,14 @@
+image:
+  repository: "plan-service"
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env:
+  APP_PORT: "4103"
+  DB_USER: "${db_user}"
+  DB_PASSWORD: "${db_pass}"
+  DB_HOST: "postgresql.postgresql.svc.cluster.local"
+  # DB_HOST: "127.0.0.1"
+  DB_PORT: "5432"
+  DB_NAME: "plan_db"
+  DB_SSLMODE: "disable"

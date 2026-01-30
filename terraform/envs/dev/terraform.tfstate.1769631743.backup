@@ -1,0 +1,450 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.3",
+  "serial": 294,
+  "lineage": "9fb50190-5f38-826d-6006-1ae70f4bd209",
+  "outputs": {
+    "cluster_endpoint": {
+      "value": "localhost",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "module": "module.kafka",
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "kafka",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "kafka",
+            "metadata": [
+              {
+                "annotations": {},
+                "generate_name": "",
+                "generation": 0,
+                "labels": {},
+                "name": "kafka",
+                "resource_version": "964",
+                "uid": "4fa887a7-d5c9-4773-8660-d3933db45e87"
+              }
+            ],
+            "timeouts": null,
+            "wait_for_default_service_account": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 1,
+          "identity": {
+            "api_version": "v1",
+            "kind": "Namespace",
+            "name": "kafka"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "module": "module.minio",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "minio",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "atomic": false,
+            "chart": "minio",
+            "cleanup_on_fail": false,
+            "create_namespace": false,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "minio",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "RELEASE.2024-12-18T13-15-44Z",
+                "chart": "minio",
+                "first_deployed": 1769524981,
+                "last_deployed": 1769524981,
+                "name": "minio",
+                "namespace": "minio",
+                "notes": "\nMinIO can be accessed via port 9000 on the following DNS name from within your cluster:\nminio.minio.cluster.local\n\nTo access MinIO from localhost, run the below commands:\n\n  1. export POD_NAME=$(kubectl get pods --namespace minio -l \"release=minio\" -o jsonpath=\"{.items[0].metadata.name}\")\n\n  2. kubectl port-forward $POD_NAME 9000 --namespace minio\n\nRead more about port forwarding here: http://kubernetes.io/docs/user-guide/kubectl/kubectl_port-forward/\n\nYou can now access MinIO server on http://localhost:9000. Follow the below steps to connect to MinIO server with mc client:\n\n  1. Download the MinIO mc client - https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart\n\n  2. export MC_HOST_minio-local=http://$(kubectl get secret --namespace minio minio -o jsonpath=\"{.data.rootUser}\" | base64 --decode):$(kubectl get secret --namespace minio minio -o jsonpath=\"{.data.rootPassword}\" | base64 --decode)@localhost:9000\n\n  3. mc ls minio-local\n\n\n",
+                "revision": 1,
+                "values": "{\"image\":{\"pullPolicy\":\"IfNotPresent\",\"repository\":\"quay.io/minio/minio\",\"tag\":\"RELEASE.2025-09-07T16-13-09Z-cpuv1\"},\"mode\":\"standalone\",\"persistence\":{\"enabled\":true,\"size\":\"10Gi\"},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"1Gi\"},\"requests\":{\"cpu\":\"250m\",\"memory\":\"512Mi\"}},\"rootPassword\":\"MrInc@2018$PeT\",\"rootUser\":\"admin\"}",
+                "version": "5.4.0"
+              }
+            ],
+            "name": "minio",
+            "namespace": "minio",
+            "pass_credentials": false,
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://charts.min.io",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_list": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "\"image\":\n  \"pullPolicy\": \"IfNotPresent\"\n  \"repository\": \"quay.io/minio/minio\"\n  \"tag\": \"RELEASE.2025-09-07T16-13-09Z-cpuv1\"\n\"mode\": \"standalone\"\n\"persistence\":\n  \"enabled\": true\n  \"size\": \"10Gi\"\n\"resources\":\n  \"limits\":\n    \"cpu\": \"500m\"\n    \"memory\": \"1Gi\"\n  \"requests\":\n    \"cpu\": \"250m\"\n    \"memory\": \"512Mi\"\n\"rootPassword\": \"MrInc@2018$PeT\"\n\"rootUser\": \"admin\"\n"
+            ],
+            "verify": false,
+            "version": "5.4.0",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "repository_password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "values"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "module.minio.kubernetes_namespace.minio"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.minio",
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "minio",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "minio",
+            "metadata": [
+              {
+                "annotations": {},
+                "generate_name": "",
+                "generation": 0,
+                "labels": {},
+                "name": "minio",
+                "resource_version": "965",
+                "uid": "fdbb6e2e-7dbb-447b-8223-e0b50b87e813"
+              }
+            ],
+            "timeouts": null,
+            "wait_for_default_service_account": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 1,
+          "identity": {
+            "api_version": "v1",
+            "kind": "Namespace",
+            "name": "minio"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "module": "module.postgresql",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "postgresql",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "atomic": true,
+            "chart": "../../modules/postgresql/charts/postgresql",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "postgresql",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "18.1.0",
+                "chart": "postgresql",
+                "first_deployed": 1769524979,
+                "last_deployed": 1769524979,
+                "name": "postgresql",
+                "namespace": "postgresql",
+                "notes": "\nCHART NAME: postgresql\nCHART VERSION: 18.2.3\nAPP VERSION: 18.1.0\n\n⚠ WARNING: Since August 28th, 2025, only a limited subset of images/charts are available for free.\n    Subscribe to Bitnami Secure Images to receive continued support and security updates.\n    More info at https://bitnami.com and https://github.com/bitnami/containers/issues/83267\n\n** Please be patient while the chart is being deployed **\n\nPostgreSQL can be accessed via port 5432 on the following DNS names from within your cluster:\n\n    postgresql.postgresql.svc.cluster.local - Read/Write connection\n\nTo get the password for \"postgres\" run:\n\n    export POSTGRES_ADMIN_PASSWORD=$(kubectl get secret --namespace postgresql postgresql -o jsonpath=\"{.data.postgres-password}\" | base64 -d)\n\nTo get the password for \"thepetlinks\" run:\n\n    export POSTGRES_PASSWORD=$(kubectl get secret --namespace postgresql postgresql -o jsonpath=\"{.data.password}\" | base64 -d)\n\nTo connect to your database run the following command:\n\n    kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgresql --image registry-1.docker.io/bitnami/postgresql:latest --env=\"PGPASSWORD=$POSTGRES_PASSWORD\" \\\n      --command -- psql --host postgresql -U thepetlinks -d thepetlinksdb -p 5432\n\n    \u003e NOTE: If you access the container using bash, make sure that you execute \"/opt/bitnami/scripts/postgresql/entrypoint.sh /bin/bash\" in order to avoid the error \"psql: local user with ID 1001} does not exist\"\n\nTo connect to your database from outside the cluster execute the following commands:\n\n    kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 \u0026\n    PGPASSWORD=\"$POSTGRES_PASSWORD\" psql --host 127.0.0.1 -U thepetlinks -d thepetlinksdb -p 5432\n\nWARNING: The configured password will be ignored on new installation in case when previous PostgreSQL release was deleted through the helm command. In that case, old PVC will have an old password, and setting it through helm won't take effect. Deleting persistent volumes (PVs) will solve the issue.\nWARNING: Rolling tag detected (bitnami/postgresql:latest), please note that it is strongly recommended to avoid using rolling tags in a production environment.\n+info https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html\nWARNING: Rolling tag detected (bitnami/os-shell:latest), please note that it is strongly recommended to avoid using rolling tags in a production environment.\n+info https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html\n\nWARNING: There are \"resources\" sections in the chart not set. Using \"resourcesPreset\" is not recommended for production. For production installations, please set the following values according to your workload needs:\n  - primary.resources\n  - readReplicas.resources\n+info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/\n",
+                "revision": 1,
+                "values": "{\"global\":{\"postgresql\":{\"auth\":{\"database\":\"thepetlinksdb\",\"password\":\"PeTL!nk@2025$P@ss\",\"postgresPassword\":\"MrInc@2018$PeT\",\"username\":\"thepetlinks\"}}},\"primary\":{\"persistence\":{\"enabled\":true,\"size\":\"10Gi\"}},\"service\":{\"port\":5432,\"type\":\"ClusterIP\"}}",
+                "version": "18.2.3"
+              }
+            ],
+            "name": "postgresql",
+            "namespace": "postgresql",
+            "pass_credentials": false,
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": null,
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_list": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 600,
+            "values": [
+              "\"global\":\n  \"postgresql\":\n    \"auth\":\n      \"database\": \"thepetlinksdb\"\n      \"password\": \"PeTL!nk@2025$P@ss\"\n      \"postgresPassword\": \"MrInc@2018$PeT\"\n      \"username\": \"thepetlinks\"\n\"primary\":\n  \"persistence\":\n    \"enabled\": true\n    \"size\": \"10Gi\"\n\"service\":\n  \"port\": 5432\n  \"type\": \"ClusterIP\"\n"
+            ],
+            "verify": false,
+            "version": "18.2.3",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "repository_password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "values"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "module": "module.redis",
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "redis",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "redis",
+            "metadata": [
+              {
+                "annotations": {},
+                "generate_name": "",
+                "generation": 0,
+                "labels": {},
+                "name": "redis",
+                "resource_version": "962",
+                "uid": "aafe2bef-a9c9-4670-bf1d-177a59eee6dd"
+              }
+            ],
+            "timeouts": null,
+            "wait_for_default_service_account": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 1,
+          "identity": {
+            "api_version": "v1",
+            "kind": "Namespace",
+            "name": "redis"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "module": "module.role_service",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "role_service",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "atomic": true,
+            "chart": "../../helm-charts/role-service",
+            "cleanup_on_fail": true,
+            "create_namespace": false,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "role-service",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "1.0",
+                "chart": "role-service",
+                "first_deployed": 1769631277,
+                "last_deployed": 1769631277,
+                "name": "role-service",
+                "namespace": "petlinks-dev",
+                "notes": "",
+                "revision": 1,
+                "values": "{\"env\":{\"APP_PORT\":\"4101\",\"DB_HOST\":\"postgresql.postgresql.svc.cluster.local\",\"DB_NAME\":\"thepetlinksdb\",\"DB_PASSWORD\":\"PeTL!nk@2025$P@ss\",\"DB_PORT\":\"5432\",\"DB_SSLMODE\":\"disable\",\"DB_USER\":\"thepetlinks\"},\"image\":{\"pullPolicy\":\"IfNotPresent\",\"repository\":\"role-service\",\"tag\":\"latest\"}}",
+                "version": "1.0.0"
+              }
+            ],
+            "name": "role-service",
+            "namespace": "petlinks-dev",
+            "pass_credentials": false,
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": null,
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_list": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "image:\r\n  repository: role-service\r\n  tag: latest\r\n  pullPolicy: IfNotPresent\r\n\r\nenv:\r\n  APP_PORT: \"4101\"\r\n  DB_USER: \"thepetlinks\"\r\n  DB_PASSWORD: \"PeTL!nk@2025$P@ss\"\r\n  DB_HOST: \"postgresql.postgresql.svc.cluster.local\"\r\n  # DB_HOST: \"127.0.0.1\"\r\n  DB_PORT: \"5432\"\r\n  DB_NAME: \"thepetlinksdb\"\r\n  DB_SSLMODE: \"disable\"\r\n"
+            ],
+            "verify": false,
+            "version": "1.0.0",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "repository_password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "values"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "module.role_service.kubernetes_namespace.role_service_ns"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.role_service",
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "role_service_ns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "petlinks-dev",
+            "metadata": [
+              {
+                "annotations": {},
+                "generate_name": "",
+                "generation": 0,
+                "labels": {},
+                "name": "petlinks-dev",
+                "resource_version": "963",
+                "uid": "a870f546-2d02-452b-a91e-e92ae3ca154c"
+              }
+            ],
+            "timeouts": null,
+            "wait_for_default_service_account": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 1,
+          "identity": {
+            "api_version": "v1",
+            "kind": "Namespace",
+            "name": "petlinks-dev"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

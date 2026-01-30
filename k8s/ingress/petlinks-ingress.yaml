@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petlinks-ingress
+  namespace: petlinks-dev
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: auth.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 80
+
+    - host: role.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: role-service
+                port:
+                  number: 80
+
+    - host: plan.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: plan-service
+                port:
+                  number: 80

@@ -1,0 +1,7 @@
+persistence:
+  size: 10Gi
+rootPassword: minioadmin
+rootUser: minioadmin
+
+provisioning:
+  enabled: false

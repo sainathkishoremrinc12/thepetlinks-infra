@@ -1,13 +1,15 @@
 image:
-  repository: "ghcr.io/thepetlinks/role-service"
-  tag: "${image_tag}"
+  repository: role-service
+  tag: latest
+  pullPolicy: IfNotPresent
 
 env:
   APP_PORT: "4101"
   DB_USER: "${db_user}"
   DB_PASSWORD: "${db_pass}"
-  # DB_HOST: "postgresql.postgres.svc.cluster.local"
-  DB_HOST: "127.0.0.1"
+  DB_HOST: "postgresql.postgresql.svc.cluster.local"
+  # DB_HOST: "127.0.0.1"
   DB_PORT: "5432"
-  DB_NAME: "thepetlinksdb"
+  DB_NAME: "access_db"
   DB_SSLMODE: "disable"
+  AUTO_MIGRATE: "true"

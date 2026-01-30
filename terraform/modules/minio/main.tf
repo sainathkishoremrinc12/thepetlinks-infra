@@ -1,44 +1,164 @@
-resource "kubernetes_namespace" "minio" {
+# PVC (v1)
+resource "kubernetes_persistent_volume_claim_v1" "minio" {
+  wait_until_bound = false   # 🔥 THIS is the fix
+
   metadata {
-    name = var.namespace
+    name      = "minio"
+    namespace = var.namespace
+  }
+
+  spec {
+    access_modes = ["ReadWriteOnce"]
+
+    resources {
+      requests = {
+        storage = var.storage_size
+      }
+    }
   }
 }
 
-resource "helm_release" "minio" {
-  name       = var.release_name
-  repository = "https://charts.min.io"
-  chart      = "minio"
-  version    = "5.4.0" # ✅ confirmed latest available stable version
-  namespace  = kubernetes_namespace.minio.metadata[0].name
+# Deployment
+resource "kubernetes_deployment" "minio" {
+  metadata {
+    name      = "minio"
+    namespace = var.namespace
+    labels = {
+      app = "minio"
+    }
+  }
 
-  values = [
-    yamlencode({
-      image = {
-        repository = "quay.io/minio/minio"
-        tag        = "RELEASE.2025-09-07T16-13-09Z-cpuv1" # ✅ working tag
-        pullPolicy = "IfNotPresent"
+  spec {
+    replicas = 1
+
+    selector {
+      match_labels = {
+        app = "minio"
       }
+    }
 
-      rootUser     = var.minio_root_user
-      rootPassword = var.minio_root_password
-
-      mode = "standalone"
-
-      persistence = {
-        enabled = true
-        size    = "10Gi"
-      }
-
-      resources = {
-        requests = {
-          memory = "512Mi"
-          cpu    = "250m"
-        }
-        limits = {
-          memory = "1Gi"
-          cpu    = "500m"
+    template {
+      metadata {
+        labels = {
+          app = "minio"
         }
       }
-    })
-  ]
+
+      spec {
+        container {
+          name  = "minio"
+          image = "minio/minio:RELEASE.2025-07-18T21-56-31Z"
+
+          args = [
+            "server",
+            "/data",
+            "--console-address",
+            ":9001"
+          ]
+
+          env {
+            name  = "MINIO_ROOT_USER"
+            value = var.root_user
+          }
+
+          env {
+            name  = "MINIO_ROOT_PASSWORD"
+            value = var.root_password
+          }
+
+          env {
+            name  = "MINIO_BROWSER_REDIRECT_URL"
+            value = "http://minio-console.petlinks.local"
+          }
+
+          port {
+            name           = "api"
+            container_port = 9000
+          }
+
+          port {
+            name           = "console"
+            container_port = 9001
+          }
+
+          volume_mount {
+            name       = "data"
+            mount_path = "/data"
+          }
+        }
+
+        volume {
+          name = "data"
+
+          persistent_volume_claim {
+            claim_name = kubernetes_persistent_volume_claim_v1.minio.metadata[0].name
+          }
+        }
+      }
+    }
+  }
+}
+
+# Service
+resource "kubernetes_service" "minio" {
+  metadata {
+    name      = "minio"
+    namespace = var.namespace
+  }
+
+  spec {
+    selector = {
+      app = "minio"
+    }
+
+    port {
+      name        = "api"
+      port        = 9000
+      target_port = 9000
+    }
+
+    port {
+      name        = "console"
+      port        = 9001
+      target_port = 9001
+    }
+
+    type = "ClusterIP"
+  }
+}
+
+# Ingress (Console)
+resource "kubernetes_ingress_v1" "console" {
+  metadata {
+    name      = "minio-console"
+    namespace = var.namespace
+
+    annotations = {
+      "nginx.ingress.kubernetes.io/proxy-body-size" = "0"
+    }
+  }
+
+  spec {
+    ingress_class_name = "nginx"
+
+    rule {
+      host = var.console_host
+
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+
+          backend {
+            service {
+              name = kubernetes_service.minio.metadata[0].name
+              port {
+                number = 9001
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
