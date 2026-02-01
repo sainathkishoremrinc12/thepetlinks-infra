@@ -1,7 +1,7 @@
 image:
   repository: "auth-service"
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 env:
   APP_PORT: "4102"
@@ -13,4 +13,4 @@ env:
   DB_NAME: "auth_db"
   DB_SSLMODE: "disable"
   AUTO_MIGRATE: "true"
-
+  JWT_SECRET: "e6166442ffe29104a9f888776f2a39fa0199132e30167062df8cc3778b480b43953167aaf0dfb873ab69e66bf039927b1f76b20baa84815a93ede883dfaedb22"

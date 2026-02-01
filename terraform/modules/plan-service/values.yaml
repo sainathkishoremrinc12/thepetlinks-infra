@@ -1,7 +1,7 @@
 image:
   repository: "plan-service"
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 env:
   APP_PORT: "4103"
