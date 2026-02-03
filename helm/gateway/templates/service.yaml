@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "gateway.fullname" . }}
+  name: gateway
 spec:
+  type: ClusterIP
   selector:
-    app: {{ include "gateway.name" . }}
+    app: gateway
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
-      protocol: TCP
+    - name: http
+      port: 4013
+      targetPort: 4013
 
 # helm upgrade --install gateway ./helm/gateway -n petlinks-dev & kubectl delete pod -l app=gateway -n petlinks-dev & kubectl logs -f deployment/gateway -n petlinks-dev
 

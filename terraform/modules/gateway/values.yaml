@@ -1,0 +1,15 @@
+image:
+  repository: gateway
+  tag: latest
+  pullPolicy: Always
+
+env:
+  APP_PORT: "4013"
+  DB_USER: "${db_user}"
+  DB_PASSWORD: "${db_pass}"
+  DB_HOST: "postgresql.postgresql.svc.cluster.local"
+  # DB_HOST: "127.0.0.1"
+  DB_PORT: "5432"
+  DB_NAME: "access_db"
+  DB_SSLMODE: "disable"
+  AUTO_MIGRATE: "true"

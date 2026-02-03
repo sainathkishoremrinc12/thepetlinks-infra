@@ -78,3 +78,12 @@ netstat -ano | findstr 5432;
 # netstat -ano | findstr 4101;
 # netstat -ano | findstr 5432;
 
+# docker build --no-cache -t name-service:latest .
+# terraform init --reconfigure
+# terraform apply
+# kubectl rollout restart deployment auth-service -n petlinks-dev
+# helm uninstall gateway -n petlinks-dev
+
+# terraform apply -target=module.docs_service.helm_release.docs_service
+
+# curl -X PUT --upload-file ./test.png "http://minio.petlinks.local/petlinks/images/12f2afe7-63bb-40ef-9108-0ec3c19c3f2b-test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=TCZWD75YUU2R2M1TO2PI%2F20260203%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260203T200300Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=f535b96d4fb084b1908ec98a79f6ce1283d68ff050c7e354dcff6968b51ec514"

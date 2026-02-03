@@ -126,39 +126,3 @@ resource "kubernetes_service" "minio" {
     type = "ClusterIP"
   }
 }
-
-# Ingress (Console)
-resource "kubernetes_ingress_v1" "console" {
-  metadata {
-    name      = "minio-console"
-    namespace = var.namespace
-
-    annotations = {
-      "nginx.ingress.kubernetes.io/proxy-body-size" = "0"
-    }
-  }
-
-  spec {
-    ingress_class_name = "nginx"
-
-    rule {
-      host = var.console_host
-
-      http {
-        path {
-          path      = "/"
-          path_type = "Prefix"
-
-          backend {
-            service {
-              name = kubernetes_service.minio.metadata[0].name
-              port {
-                number = 9001
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}

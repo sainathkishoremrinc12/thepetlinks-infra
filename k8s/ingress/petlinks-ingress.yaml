@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: petlinks-ingress
   namespace: petlinks-dev
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
 spec:
   ingressClassName: nginx
   rules:
@@ -38,3 +43,36 @@ spec:
                 name: plan-service
                 port:
                   number: 80
+
+    - host: master.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: master-service
+                port:
+                  number: 80
+
+    - host: docs.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docs-service
+                port:
+                  number: 8080
+
+    - host: gateway.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 4013

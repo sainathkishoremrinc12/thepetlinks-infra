@@ -1,0 +1,5 @@
+apiVersion: v2
+name: docs-service
+description: docs Service for PetLinks
+version: 1.0.0
+appVersion: "1.0"

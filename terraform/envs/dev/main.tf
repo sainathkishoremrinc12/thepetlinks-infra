@@ -76,3 +76,30 @@ module "plan_service" {
   db_user     = var.db_user
   db_password = var.db_password
 }
+
+# master Module
+module "master_service" {
+  source      = "../../modules/master-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# gateway Module
+module "gateway" {
+  source      = "../../modules/gateway"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# docs Module
+module "docs_service" {
+  source      = "../../modules/docs-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
