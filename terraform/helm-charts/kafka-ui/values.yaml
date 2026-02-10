@@ -1,0 +1,20 @@
+image:
+  repository: provectuslabs/kafka-ui
+  tag: latest
+
+containerPort: 8090
+
+service:
+  type: ClusterIP
+  port: 8090
+
+kafka:
+  name: petlinks-kafka
+  bootstrapServers: kafka.petlinks.svc.cluster.local:9092
+
+ingress:
+  enabled: true
+  className: nginx
+  host: kafka-ui.dev.petlinks.local
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /

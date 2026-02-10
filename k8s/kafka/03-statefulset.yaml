@@ -23,6 +23,10 @@ spec:
           env:
             - name: KAFKA_CLUSTER_ID
               value: "thepetlinks-kafka-cluster"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           command:
             - sh
             - -c

@@ -5,3 +5,9 @@ rootUser: minioadmin
 
 provisioning:
   enabled: false
+
+ingress:
+  host: kafka-ui.dev.petlinks.local
+
+kafka:
+  bootstrapServers: kafka.petlinks.svc.cluster.local:9092

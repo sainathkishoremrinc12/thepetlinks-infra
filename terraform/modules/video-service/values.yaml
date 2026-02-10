@@ -1,18 +1,16 @@
 image:
-  repository: docs-service
-  tag: "latest"
+  repository: "video-service"
+  tag: latest
   pullPolicy: Always
 
-service:
-  port: 8080
-
 env:
-  APP_PORT: "8080"
-  DB_HOST: "postgresql.postgres.svc.cluster.local"
+  APP_PORT: "4015"
+  DB_USER: "${db_user}"
+  DB_PASSWORD: "${db_pass}"
+  DB_HOST: "postgresql.postgresql.svc.cluster.local"
+  # DB_HOST: "127.0.0.1"
   DB_PORT: "5432"
-  DB_USER: "thepetlinks"
-  DB_PASSWORD: "PeTL!nk@2025$P@ss"
-  DB_NAME: "plan_db"
+  DB_NAME: "video_db"
   DB_SSLMODE: "disable"
 
   S3_ENDPOINT: http://minio.minio.svc.cluster.local:9000

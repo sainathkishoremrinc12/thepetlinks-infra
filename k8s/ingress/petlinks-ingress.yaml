@@ -55,6 +55,28 @@ spec:
                 port:
                   number: 80
 
+    - host: video.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: video-service
+                port:
+                  number: 80
+
+    - host: vendor.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vendor-service
+                port:
+                  number: 80
+
     - host: docs.petlinks.local
       http:
         paths:

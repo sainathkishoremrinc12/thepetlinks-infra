@@ -86,6 +86,15 @@ module "master_service" {
   db_password = var.db_password
 }
 
+# video Module
+module "video_service" {
+  source      = "../../modules/video-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
 # gateway Module
 module "gateway" {
   source      = "../../modules/gateway"
@@ -103,3 +112,23 @@ module "docs_service" {
   db_user     = var.db_user
   db_password = var.db_password
 }
+
+# vendor Module
+module "vendor_service" {
+  source      = "../../modules/vendor-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# Kafka UI Module
+# resource "helm_release" "kafka_ui" {
+#   name      = "kafka-ui"
+#   chart     = "../../helm-charts/kafka-ui"
+#   namespace = "monitoring"
+# 
+#   values = [
+#     file("${path.module}/current-values.yaml")
+#   ]
+# }
