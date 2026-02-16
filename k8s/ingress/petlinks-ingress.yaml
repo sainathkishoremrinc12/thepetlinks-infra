@@ -77,6 +77,39 @@ spec:
                 port:
                   number: 80
 
+    - host: customer.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-service
+                port:
+                  number: 80
+
+    - host: notification.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
+                port:
+                  number: 80
+
+    - host: mail.petlinks.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mail-service
+                port:
+                  number: 80
+
     - host: docs.petlinks.local
       http:
         paths:

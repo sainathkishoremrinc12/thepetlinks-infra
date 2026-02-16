@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "notification-service.fullname" . }}
+  labels:
+    app: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - name: notification-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "Always" }}
+          ports:
+            - containerPort: 4108
+          env:
+            - name: APP_PORT
+              value: "{{ .Values.env.APP_PORT }}"
+            - name: DB_HOST
+              value: "{{ .Values.env.DB_HOST }}"
+            - name: DB_PORT
+              value: "{{ .Values.env.DB_PORT }}"
+            - name: DB_USER
+              value: "{{ .Values.env.DB_USER }}"
+            - name: DB_PASSWORD
+              value: "{{ .Values.env.DB_PASSWORD }}"
+            - name: DB_NAME
+              value: "{{ .Values.env.DB_NAME }}"
+            - name: DB_SSLMODE
+              value: "{{ .Values.env.DB_SSLMODE }}"

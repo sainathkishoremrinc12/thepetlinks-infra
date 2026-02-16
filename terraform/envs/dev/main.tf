@@ -122,6 +122,33 @@ module "vendor_service" {
   db_password = var.db_password
 }
 
+# customer Module
+module "customer_service" {
+  source      = "../../modules/customer-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# notification Module
+module "notification_service" {
+  source      = "../../modules/notification-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+# mail Module
+module "mail_service" {
+  source      = "../../modules/mail-service"
+  namespace   = "petlinks-dev"
+  image_tag   = "latest"
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
 # Kafka UI Module
 # resource "helm_release" "kafka_ui" {
 #   name      = "kafka-ui"
